@@ -53,7 +53,17 @@
 
     //Draw a filled rectangle centered under the mouse click
     //x, y is the top left corner, so shift up and left by 5 to center it under the mouse.
-    context.fillCircle(x-5, y-5, 10, 10)
+    //context.fillCircle(x-5, y-5, 10, 10)
+
+    // Begin Path
+
+    // Use arc
+
+    // Use stroke
+    context.beginPath()
+    context.arc(x-5, y-5, 30, 0, 6.3);
+
+    context.stroke();
 
   })
 
