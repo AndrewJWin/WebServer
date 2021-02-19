@@ -16,25 +16,56 @@
 
 <P>Drag the mouse on the canvas</P>
 <canvas id="canvas" height="400" width="400"></canvas>
-<label for="color-select">Brush Color</label>
-<input type="color" id="color-select">
-<label for="line-size">Brush width</label>
-<input type="range" id="line-size" min="1" max="10">
+<br>
+<div id="settings">
+    <label for="color-select">Brush Color</label>
+    <input type="color" id="color-select">
+    <label for="line-size">Brush width</label>
+    <input type="range" id="line-size" min="1">
+    <label for="shape-type">Brush Shape</label>
+
+    <select id="shape-type">
+        <option value="square">Square</option>
+        <option value="circle">Circle</option>
+        <option value="semi-circle">Semi-circle</option>
+    </select>
+
+    <button id="clear">Clear Canvas</button>
+</div>
+
 </head>
+
+<!-- Drawing script. -->
 <script>
 
   let canvas = document.querySelector('#canvas')
   let context = canvas.getContext('2d')
 
+  // Fetching all the elements we will need.
   let colorInput = document.getElementById("color-select");
   let lineSize = document.getElementById("line-size");
+  let brushType = document.getElementById("shape-type");
+  let clearButton = document.getElementById("clear");
 
   // Keep track of whether the mouse button has been pressed down or not.
   // Think of this as whether the user is drawing or not, is their brush on the canvas?
-  let mousedown = false 
+  let mousedown = false;
+
+  // Assigning the x and y values to null - but not undefined.
+  let x, y;
 
   canvas.addEventListener('mousedown', function() {
+    // Setting color values for both Squares and Circular shapes.
+    context.strokeStyle = colorInput.value;
+    context.fillStyle = colorInput.value;
+
+    // Setting the states and values of the x and y coordinates.
     mousedown = true
+    x = event.offsetX;
+    y = event.offsetY;
+
+    // Start the draw function so when we click it starts drawing.
+    draw(brushType.value, x, y, lineSize.value)
   })
 
   canvas.addEventListener('mouseup', function() {
@@ -53,26 +84,47 @@
 
     // event is a built-in variable, contains the event that triggered this function
     // get the x, y location of the event
-    let x = event.offsetX
-    let y = event.offsetY   //offsetX, offsetY, may not work in older browsers
+    x = event.offsetX
+    y = event.offsetY   //offsetX, offsetY, may not work in older browsers
 
-    //Draw a filled rectangle centered under the mouse click
-    //x, y is the top left corner, so shift up and left by 5 to center it under the mouse.
-    //context.fillCircle(x-5, y-5, 10, 10)
-
-    // Begin Path
-
-    // Use arc
-
-    // Use stroke
-    context.strokeStyle = colorInput.value;
-    context.beginPath()
-    context.arc(x-5, y-5, lineSize.value, 0, 6.3);
-
-    context.stroke();
+    // Utilize draw function, forwarding the x and y values - as well as the brush type and line size.
+    draw(brushType.value, x, y, lineSize.value)
 
   })
 
+  // If the user clicks the "Clear Canvas" button.
+  clearButton.addEventListener("click", function() {
+      // Confirm the action.
+      if(confirm("Clear Canvas?")) {
+        // Interesting state change - it effectively does nothing but it does clear the canvas.
+        canvas.width = canvas.width
+      }
+  })
+
+  // Draw function, takes the shape type, x and y coordinates and the size.
+  function draw(shape, x, y, size) {
+    // Switch case, based on the shape name.
+    switch (shape) {
+        case "circle": {
+           context.beginPath()
+           context.arc(x-5, y-5, size, 0, 2 * Math.PI);
+           context.stroke();
+         }
+        break;
+
+        case "semi-circle": {
+           context.beginPath()
+           context.arc(x-5, y-5, size, 0, Math.PI);
+           context.stroke();
+         }
+        break;
+        
+        case "square": {
+           context.beginPath()
+           context.fillRect(x-5, y-5, size, size)
+        }
+    }
+  }
 </script>
 
 </body>

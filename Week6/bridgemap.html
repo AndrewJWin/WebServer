@@ -1,1 +1,64 @@
-Nothing here yet.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">    
+    <title>Longest US Bridges</title>
+
+    <!-- Leaflet script and CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    
+    <!-- Chart.JS script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    
+    <!-- Our stylesheet. Make sure the size of the map div is set before trying to draw the map.-->
+    <link rel="stylesheet" type="text/css" href="mapstyle.css">
+
+    <!-- Our script, uses Leaflet to draw the maps and map components for this page  -->
+    <script async defer src="maps.js" id="mapData"></script>
+</head>
+
+<body>
+    <h1>Where are the longest US Bridges?</h1>
+
+    <!-- Divisions for the map box and chart box. -->
+    <div id="bridge-map"></div>
+    <div id="chart-box"><canvas id="myChart" width="1" height="1"></canvas></div>
+</body>
+
+<!-- Chart script, open for ideas on how to pull the data from the map.js file. -->
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Verrazano-Narrows Bridge", "Golden Gate Bridge", "Mackinac Bridge", "George Washington Bridge", "Tacoma Narrows Bridge"],
+            datasets: [{
+                label: 'Length by Meter',
+                data: [1298.4, 1280.2, 1158.0, 1067.0, 853.44, ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                ],
+                borderWidth: 1
+            }],
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        }
+    });
+</script>
+
+</html>
