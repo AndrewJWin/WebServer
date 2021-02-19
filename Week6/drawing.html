@@ -11,22 +11,24 @@
     }
 
   </style>
-<label for="color-select">Brush Color</label>
-<input type="color" id="color-select">
-<label for="line-size">Brush width</label>
-<input type="range" id="line-size" min="1" max="10">
-</head>
 <body>
 
 
 <P>Drag the mouse on the canvas</P>
 <canvas id="canvas" height="400" width="400"></canvas>
-
+<label for="color-select">Brush Color</label>
+<input type="color" id="color-select">
+<label for="line-size">Brush width</label>
+<input type="range" id="line-size" min="1" max="10">
+</head>
 <script>
 
   let canvas = document.querySelector('#canvas')
   let context = canvas.getContext('2d')
-  
+
+  let colorInput = document.getElementById("color-select");
+  let lineSize = document.getElementById("line-size");
+
   // Keep track of whether the mouse button has been pressed down or not.
   // Think of this as whether the user is drawing or not, is their brush on the canvas?
   let mousedown = false 
@@ -63,8 +65,9 @@
     // Use arc
 
     // Use stroke
+    context.strokeStyle = colorInput;
     context.beginPath()
-    context.arc(x-5, y-5, 30, 0, 6.3);
+    context.arc(x-5, y-5, lineSize, 0, 6.3);
 
     context.stroke();
 
