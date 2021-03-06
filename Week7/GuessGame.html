@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Capital City Guessing Game</title>
+    <meta charset="utf-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">    <script href="countries.js"></script>
+   
+    <script src="countries.js"></script>
+    <script async defer src="game.js"></script>
+
+</head>
+
+<body>
+<div class="content m-4 center-block">
+    <h1>Geography Quiz</h1>
+
+    <p>Test your knowledge of geography. What's the capital city of this country?</p>
+
+    <h3 id="random-country"></h3>
+
+    <!-- Answer form, take input from the user to check the Capital City. -->
+    <div class="input-group mb-3">
+        <input type="text" id="user-answer" class="form-control" placeholder="Answer" aria-label="answer" aria-description="submit-answer">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="submit-answer">Check Answer</button>
+        </div>
+    </div>
+
+    <h4 id="Answer-result">Were you correct?</h2>
+    <button hidden=true class="btn btn-outline-secondary" type="button" id="replay">Play Again?</button>
+
+</div>
+</body>
+
+</html>
