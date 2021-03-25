@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    
+    <div id="app">
+        <h1>Hello Vue</h1>
+        <p>
+            {{ messageWithExclamationPoints }}
+        </p>
+
+        <button v-on:click="addExclamation">Add !</button>
+        <button v-on:click="clear">Clear</button>
+    </div>
+
+    <script>
+
+        let app = Vue.createApp({
+            data() {
+                return {
+                    message: 'hi',
+                    numberOfExclamationPoints: 0,
+                    numberClicked: 0
+                }
+            },
+            methods: {
+                addExclamation() {
+                    if (this.numberOfExclamationPoints <10) {
+                        this.message += "!"
+                        this.numberOfExclamationPoints++;
+                    } else {
+                        this.numberClicked++
+                        switch (this.numberClicked) {
+                            case 2:
+                                alert("What are you doing? No more exclamations.");
+                                break;
+
+                            case 3:
+                                alert("Stop, no more exclamations.");
+                                break;
+                                
+                            case 4:
+                                alert("Stop it, you already have enough.")
+                                break
+
+                            case 5:
+                                alert("No.");
+                                break;
+
+                            case 6:
+                                alert("Stop it, any more and I will close this page..");
+                            break;
+
+                            case 7:
+                                window.close();
+                            break;
+                        
+                            default:
+                                alert("No more exclamation points.");
+                                break;
+                        }
+                    }
+                },
+                clear() {
+                    this.message = "hi"
+                    this.numberOfExclamationPoints = 0;
+                    this.numberClicked = 0;
+                }
+            },
+            computed: {
+                messageWithExclamationPoints() {
+                    let messageWithPoints = this.message;
+                    for (let x; x < this.numberOfExclamationPoints; x++) {
+                        messageWithPoints += "!";
+                    }
+                    return messageWithPoints;
+                }
+            }
+        })
+
+        app.mount('#app')
+
+    </script>
+
+</body>
+</html>

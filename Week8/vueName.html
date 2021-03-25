@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>What's your Name?</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    
+    <div id="app">
+        <h1>Hello User</h1>
+        <label for="name">Please enter your name:</label>
+        <input v-model="name" id="name">
+        <p v-if="name">
+            Hi {{name}}, nice to meet you.
+        </p>
+        <p v-else>
+            Waiting for input.
+        </p>
+
+        <button v-on:click="clear">Clear</button>
+    </div>
+
+    <script>
+
+        let app = Vue.createApp({
+            data() {
+                return {
+                    name: '',
+                }
+            },
+            methods: {
+                clear() {
+                    this.name = ""
+                }
+            }
+        })
+
+        app.mount('#app')
+
+    </script>
+
+</body>
+</html>
