@@ -1,0 +1,22 @@
+#student-table {
+    max-height: 400px;
+    overflow: scroll;
+}
+
+th, tr {
+    width: 33%;
+}
+
+.present {
+    color: gray;
+    font-style: italic;
+}
+
+.absent {
+    color: black;
+    font-weight: bold;
+}
+
+[v-cloak] {
+    display: none;
+}
